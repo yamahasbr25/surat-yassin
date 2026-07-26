@@ -1,0 +1,972 @@
+<!DOCTYPE html>
+<html lang="id" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Surat Yasin - Profesional & Mudah Dibaca</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #fdfbf7;
+            --card-bg: #ffffff;
+            --text-main: #1e293b;
+            --text-muted: #475569;
+            --accent: #059669; /* Emerald 600 */
+            --accent-hover: #047857;
+            --border-color: #e2e8f0;
+            --arabic-font: 'Amiri', serif;
+            --ui-font: 'Inter', sans-serif;
+            --arabic-size: 32px;
+        }
+        [data-theme="dark"] {
+            --bg-color: #0f172a;
+            --card-bg: #1e293b;
+            --text-main: #f1f5f9;
+            --text-muted: #cbd5e1;
+            --accent: #10b981;
+            --border-color: #334155;
+        }
+        * { box-sizing: border-box; }
+        body {
+            font-family: var(--ui-font);
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .header {
+            text-align: center;
+            padding: 40px 20px;
+            background: linear-gradient(135deg, #064e3b 0%, #059669 100%);
+            color: #ffffff;
+            border-radius: 16px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        .header::after {
+            content: "يس";
+            position: absolute;
+            font-family: var(--arabic-font);
+            font-size: 150px;
+            color: rgba(255, 255, 255, 0.05);
+            top: -30px;
+            right: 20px;
+            pointer-events: none;
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 2.5rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+        .header p {
+            margin: 10px 0 0;
+            opacity: 0.9;
+            font-size: 1.1rem;
+        }
+        .toolbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+            padding: 16px 20px;
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+        .toolbar-group {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .btn {
+            background-color: transparent;
+            color: var(--text-main);
+            border: 1px solid var(--border-color);
+            padding: 8px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-family: var(--ui-font);
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .btn:hover {
+            background-color: var(--accent);
+            color: #ffffff;
+            border-color: var(--accent);
+        }
+        .btn.primary {
+            background-color: var(--accent);
+            color: #ffffff;
+            border: none;
+        }
+        .btn.primary:hover {
+            background-color: var(--accent-hover);
+        }
+        
+        .bismillah {
+            font-family: var(--arabic-font);
+            font-size: 2.5rem;
+            text-align: center;
+            margin: 40px 0;
+            color: var(--text-main);
+            font-weight: 400;
+        }
+        .ayat-list {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        .ayat-card {
+            background-color: var(--card-bg);
+            border-radius: 16px;
+            padding: 24px 30px;
+            border: 1px solid var(--border-color);
+            border-left: 5px solid var(--accent);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .ayat-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.08);
+        }
+        .ayat-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+        .ayat-number {
+            background-color: var(--accent);
+            color: white;
+            width: 38px;
+            height: 38px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 1rem;
+            box-shadow: 0 2px 4px rgba(5, 150, 105, 0.2);
+        }
+        .arabic {
+            font-family: var(--arabic-font);
+            font-size: var(--arabic-size);
+            text-align: right;
+            direction: rtl;
+            line-height: 2.4;
+            margin: 10px 0 25px 0;
+            color: var(--text-main);
+            word-spacing: 2px;
+        }
+        .latin {
+            color: var(--accent);
+            font-style: italic;
+            font-size: 1.05rem;
+            margin-bottom: 10px;
+            font-weight: 500;
+        }
+        .arti {
+            color: var(--text-muted);
+            font-size: 1rem;
+            line-height: 1.7;
+            margin: 0;
+        }
+        
+        .floating-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background-color: var(--accent);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+            border: none;
+            z-index: 1000;
+        }
+        .floating-btn.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+        .floating-btn:hover {
+            background-color: var(--accent-hover);
+            transform: scale(1.1);
+        }
+        
+        @media (max-width: 600px) {
+            :root { --arabic-size: 28px; }
+            .header h1 { font-size: 2rem; }
+            .ayat-card { padding: 20px; }
+            .bismillah { font-size: 2rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Surat Yasin</h1>
+            <p>سورة يس • 83 Ayat • Makkiyah</p>
+        </div>
+
+        <div class="toolbar">
+            <div class="toolbar-group">
+                <span style="font-size: 0.9rem; color: var(--text-muted); font-weight: 500;">Ukuran Arab:</span>
+                <button class="btn" onclick="adjustFontSize(-2)">A-</button>
+                <button class="btn" onclick="adjustFontSize(2)">A+</button>
+            </div>
+            <div class="toolbar-group">
+                <button class="btn primary" id="themeToggle" onclick="toggleTheme()">
+                    <svg id="moon-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+                    <span id="theme-text">Dark Mode</span>
+                </button>
+            </div>
+        </div>
+
+        <div class="bismillah">
+            بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ
+        </div>
+
+        <div class="ayat-list">
+            
+            <div class="ayat-card" id="ayat-1">
+                <div class="ayat-header">
+                    <div class="ayat-number">1</div>
+                </div>
+                <div class="arabic">يسٓ ۝</div>
+                <div class="latin">yā sīn</div>
+                <div class="arti">Yaa siin</div>
+            </div>
+            <div class="ayat-card" id="ayat-2">
+                <div class="ayat-header">
+                    <div class="ayat-number">2</div>
+                </div>
+                <div class="arabic">وَٱلْقُرْءَانِ ٱلْحَكِيمِ ۝</div>
+                <div class="latin">wal-qur`ānil-ḥakīm</div>
+                <div class="arti">Demi Al Quran yang penuh hikmah,</div>
+            </div>
+            <div class="ayat-card" id="ayat-3">
+                <div class="ayat-header">
+                    <div class="ayat-number">3</div>
+                </div>
+                <div class="arabic">إِنَّكَ لَمِنَ ٱلْمُرْسَلِينَ ۝</div>
+                <div class="latin">innaka laminal-mursalīn</div>
+                <div class="arti">Sesungguhnya kamu salah seorang dari rasul-rasul,</div>
+            </div>
+            <div class="ayat-card" id="ayat-4">
+                <div class="ayat-header">
+                    <div class="ayat-number">4</div>
+                </div>
+                <div class="arabic">عَلَىٰ صِرَٰطٍ مُّسْتَقِيمٍ ۝</div>
+                <div class="latin">'alā ṣirāṭim mustaqīm</div>
+                <div class="arti">(yang berada) diatas jalan yang lurus,</div>
+            </div>
+            <div class="ayat-card" id="ayat-5">
+                <div class="ayat-header">
+                    <div class="ayat-number">5</div>
+                </div>
+                <div class="arabic">تَنزِيلَ ٱلْعَزِيزِ ٱلرَّحِيمِ ۝</div>
+                <div class="latin">tanzīlal-'azīzir-raḥīm</div>
+                <div class="arti">(sebagai wahyu) yang diturunkan oleh Yang Maha Perkasa lagi Maha Penyayang,</div>
+            </div>
+            <div class="ayat-card" id="ayat-6">
+                <div class="ayat-header">
+                    <div class="ayat-number">6</div>
+                </div>
+                <div class="arabic">لِتُنذِرَ قَوْمًا مَّآ أُنذِرَ ءَابَآؤُهُمْ فَهُمْ غَٰفِلُونَ ۝</div>
+                <div class="latin">litunżira qaumam mā unżira ābā`uhum fa hum gāfilụn</div>
+                <div class="arti">Agar kamu memberi peringatan kepada kaum yang bapak-bapak mereka belum pernah diberi peringatan, karena itu mereka lalai.</div>
+            </div>
+            <div class="ayat-card" id="ayat-7">
+                <div class="ayat-header">
+                    <div class="ayat-number">7</div>
+                </div>
+                <div class="arabic">لَقَدْ حَقَّ ٱلْقَوْلُ عَلَىٰٓ أَكْثَرِهِمْ فَهُمْ لَا يُؤْمِنُونَ ۝</div>
+                <div class="latin">laqad ḥaqqal-qaulu 'alā akṡarihim fa hum lā yu`minụn</div>
+                <div class="arti">Sesungguhnya telah pasti berlaku perkataan (ketentuan Allah) terhadap kebanyakan mereka, kerena mereka tidak beriman.</div>
+            </div>
+            <div class="ayat-card" id="ayat-8">
+                <div class="ayat-header">
+                    <div class="ayat-number">8</div>
+                </div>
+                <div class="arabic">إِنَّا جَعَلْنَا فِىٓ أَعْنَٰقِهِمْ أَغْلَٰلًا فَهِىَ إِلَى ٱلْأَذْقَانِ فَهُم مُّقْمَحُونَ ۝</div>
+                <div class="latin">innā ja'alnā fī a'nāqihim aglālan fa hiya ilal-ażqāni fa hum muqmaḥụn</div>
+                <div class="arti">Sesungguhnya Kami telah memasang belenggu dileher mereka, lalu tangan mereka (diangkat) ke dagu, maka karena itu mereka tertengadah.</div>
+            </div>
+            <div class="ayat-card" id="ayat-9">
+                <div class="ayat-header">
+                    <div class="ayat-number">9</div>
+                </div>
+                <div class="arabic">وَجَعَلْنَا مِنۢ بَيْنِ أَيْدِيهِمْ سَدًّا وَمِنْ خَلْفِهِمْ سَدًّا فَأَغْشَيْنَٰهُمْ فَهُمْ لَا يُبْصِرُونَ ۝</div>
+                <div class="latin">wa ja'alnā mim baini aidīhim saddaw wa min khalfihim saddan fa agsyaināhum fa hum lā yubṣirụn</div>
+                <div class="arti">Dan Kami adakan di hadapan mereka dinding dan di belakang mereka dinding (pula), dan Kami tutup (mata) mereka sehingga mereka tidak dapat melihat.</div>
+            </div>
+            <div class="ayat-card" id="ayat-10">
+                <div class="ayat-header">
+                    <div class="ayat-number">10</div>
+                </div>
+                <div class="arabic">وَسَوَآءٌ عَلَيْهِمْ ءَأَنذَرْتَهُمْ أَمْ لَمْ تُنذِرْهُمْ لَا يُؤْمِنُونَ ۝</div>
+                <div class="latin">wa sawā`un 'alaihim a anżartahum am lam tunżir-hum lā yu`minụn</div>
+                <div class="arti">Sama saja bagi mereka apakah kamu memberi peringatan kepada mereka ataukah kamu tidak memberi peringatan kepada mereka, mereka tidak akan beriman.</div>
+            </div>
+            <div class="ayat-card" id="ayat-11">
+                <div class="ayat-header">
+                    <div class="ayat-number">11</div>
+                </div>
+                <div class="arabic">إِنَّمَا تُنذِرُ مَنِ ٱتَّبَعَ ٱلذِّكْرَ وَخَشِىَ ٱلرَّحْمَٰنَ بِٱلْغَيْبِ ۖ فَبَشِّرْهُ بِمَغْفِرَةٍ وَأَجْرٍ كَرِيمٍ ۝</div>
+                <div class="latin">innamā tunżiru manittaba'aż-żikra wa khasyiyar-raḥmāna bil-gaīb, fa basysyir-hu bimagfiratiw wa ajring karīm</div>
+                <div class="arti">Sesungguhnya kamu hanya memberi peringatan kepada orang-orang yang mau mengikuti peringatan dan yang takut kepada Tuhan Yang Maha Pemurah walaupun dia tidak melihatnya. Maka berilah mereka kabar gembira dengan ampunan dan pahala yang mulia.</div>
+            </div>
+            <div class="ayat-card" id="ayat-12">
+                <div class="ayat-header">
+                    <div class="ayat-number">12</div>
+                </div>
+                <div class="arabic">إِنَّا نَحْنُ نُحْىِ ٱلْمَوْتَىٰ وَنَكْتُبُ مَا قَدَّمُوا۟ وَءَاثَٰرَهُمْ ۚ وَكُلَّ شَىْءٍ أَحْصَيْنَٰهُ فِىٓ إِمَامٍ مُّبِينٍ ۝</div>
+                <div class="latin">innā naḥnu nuḥyil-mautā wa naktubu mā qaddamụ wa āṡārahum, wa kulla syai`in aḥṣaināhu fī imāmim mubīn</div>
+                <div class="arti">Sesungguhnya Kami menghidupkan orang-orang mati dan Kami menuliskan apa yang telah mereka kerjakan dan bekas-bekas yang mereka tinggalkan. Dan segala sesuatu Kami kumpulkan dalam Kitab Induk yang nyata (Lauh Mahfuzh).</div>
+            </div>
+            <div class="ayat-card" id="ayat-13">
+                <div class="ayat-header">
+                    <div class="ayat-number">13</div>
+                </div>
+                <div class="arabic">وَٱضْرِبْ لَهُم مَّثَلًا أَصْحَٰبَ ٱلْقَرْيَةِ إِذْ جَآءَهَا ٱلْمُرْسَلُونَ ۝</div>
+                <div class="latin">waḍrib lahum maṡalan aṣ-ḥābal-qaryah, iż jā`ahal-mursalụn</div>
+                <div class="arti">Dan buatlah bagi mereka suatu perumpamaan, yaitu penduduk suatu negeri ketika utusan-utusan datang kepada mereka.</div>
+            </div>
+            <div class="ayat-card" id="ayat-14">
+                <div class="ayat-header">
+                    <div class="ayat-number">14</div>
+                </div>
+                <div class="arabic">إِذْ أَرْسَلْنَآ إِلَيْهِمُ ٱثْنَيْنِ فَكَذَّبُوهُمَا فَعَزَّزْنَا بِثَالِثٍ فَقَالُوٓا۟ إِنَّآ إِلَيْكُم مُّرْسَلُونَ ۝</div>
+                <div class="latin">iż arsalnā ilaihimuṡnaini fa każżabụhumā fa 'azzaznā biṡāliṡin fa qālū innā ilaikum mursalụn</div>
+                <div class="arti">(yaitu) ketika Kami mengutus kepada mereka dua orang utusan, lalu mereka mendustakan keduanya; kemudian Kami kuatkan dengan (utusan) yang ketiga, maka ketiga utusan itu berkata: "Sesungguhnya kami adalah orang-orang di utus kepadamu".</div>
+            </div>
+            <div class="ayat-card" id="ayat-15">
+                <div class="ayat-header">
+                    <div class="ayat-number">15</div>
+                </div>
+                <div class="arabic">قَالُوا۟ مَآ أَنتُمْ إِلَّا بَشَرٌ مِّثْلُنَا وَمَآ أَنزَلَ ٱلرَّحْمَٰنُ مِن شَىْءٍ إِنْ أَنتُمْ إِلَّا تَكْذِبُونَ ۝</div>
+                <div class="latin">qālụ mā antum illā basyarum miṡlunā wa mā anzalar-raḥmānu min syai`in in antum illā takżibụn</div>
+                <div class="arti">Mereka menjawab: "Kamu tidak lain hanyalah manusia seperti kami dan Allah Yang Maha Pemurah tidak menurunkan sesuatupun, kamu tidak lain hanyalah pendusta belaka".</div>
+            </div>
+            <div class="ayat-card" id="ayat-16">
+                <div class="ayat-header">
+                    <div class="ayat-number">16</div>
+                </div>
+                <div class="arabic">قَالُوا۟ رَبُّنَا يَعْلَمُ إِنَّآ إِلَيْكُمْ لَمُرْسَلُونَ ۝</div>
+                <div class="latin">qālụ rabbunā ya'lamu innā ilaikum lamursalụn</div>
+                <div class="arti">Mereka berkata: "Tuhan kami mengetahui bahwa sesungguhnya kami adalah orang yang diutus kepada kamu".</div>
+            </div>
+            <div class="ayat-card" id="ayat-17">
+                <div class="ayat-header">
+                    <div class="ayat-number">17</div>
+                </div>
+                <div class="arabic">وَمَا عَلَيْنَآ إِلَّا ٱلْبَلَٰغُ ٱلْمُبِينُ ۝</div>
+                <div class="latin">wa mā 'alainā illal-balāgul-mubīn</div>
+                <div class="arti">Dan kewajiban kami tidak lain hanyalah menyampaikan (perintah Allah) dengan jelas".</div>
+            </div>
+            <div class="ayat-card" id="ayat-18">
+                <div class="ayat-header">
+                    <div class="ayat-number">18</div>
+                </div>
+                <div class="arabic">قَالُوٓا۟ إِنَّا تَطَيَّرْنَا بِكُمْ ۖ لَئِن لَّمْ تَنتَهُوا۟ لَنَرْجُمَنَّكُمْ وَلَيَمَسَّنَّكُم مِّنَّا عَذَابٌ أَلِيمٌ ۝</div>
+                <div class="latin">qālū innā taṭayyarnā bikum, la`il lam tantahụ lanarjumannakum wa layamassannakum minnā 'ażābun alīm</div>
+                <div class="arti">Mereka menjawab: "Sesungguhnya kami bernasib malang karena kamu, sesungguhnya jika kamu tidak berhenti (menyeru kami), niscaya kami akan merajam kamu dan kamu pasti akan mendapat siksa yang pedih dari kami".</div>
+            </div>
+            <div class="ayat-card" id="ayat-19">
+                <div class="ayat-header">
+                    <div class="ayat-number">19</div>
+                </div>
+                <div class="arabic">قَالُوا۟ طَٰٓئِرُكُم مَّعَكُمْ ۚ أَئِن ذُكِّرْتُم ۚ بَلْ أَنتُمْ قَوْمٌ مُّسْرِفُونَ ۝</div>
+                <div class="latin">qālụ ṭā`irukum ma'akum, a in żukkirtum, bal antum qaumum musrifụn</div>
+                <div class="arti">Utusan-utusan itu berkata: "Kemalangan kamu adalah karena kamu sendiri. Apakah jika kamu diberi peringatan (kamu bernasib malang)? Sebenarnya kamu adalah kaum yang melampui batas".</div>
+            </div>
+            <div class="ayat-card" id="ayat-20">
+                <div class="ayat-header">
+                    <div class="ayat-number">20</div>
+                </div>
+                <div class="arabic">وَجَآءَ مِنْ أَقْصَا ٱلْمَدِينَةِ رَجُلٌ يَسْعَىٰ قَالَ يَٰقَوْمِ ٱتَّبِعُوا۟ ٱلْمُرْسَلِينَ ۝</div>
+                <div class="latin">wa jā`a min aqṣal-madīnati rajuluy yas'ā qāla yā qaumittabi'ul-mursalīn</div>
+                <div class="arti">Dan datanglah dari ujung kota, seorang laki-laki dengan bergegas-gegas ia berkata: "Hai kaumku, ikutilah utusan-utusan itu".</div>
+            </div>
+            <div class="ayat-card" id="ayat-21">
+                <div class="ayat-header">
+                    <div class="ayat-number">21</div>
+                </div>
+                <div class="arabic">ٱتَّبِعُوا۟ مَن لَّا يَسْـَٔلُكُمْ أَجْرًا وَهُم مُّهْتَدُونَ ۝</div>
+                <div class="latin">ittabi'ụ mal lā yas`alukum ajraw wa hum muhtadụn</div>
+                <div class="arti">Ikutilah orang yang tiada minta balasan kepadamu; dan mereka adalah orang-orang yang mendapat petunjuk.</div>
+            </div>
+            <div class="ayat-card" id="ayat-22">
+                <div class="ayat-header">
+                    <div class="ayat-number">22</div>
+                </div>
+                <div class="arabic">وَمَا لِىَ لَآ أَعْبُدُ ٱلَّذِى فَطَرَنِى وَإِلَيْهِ تُرْجَعُونَ ۝</div>
+                <div class="latin">wa mā liya lā a'budullażī faṭaranī wa ilaihi turja'ụn</div>
+                <div class="arti">Mengapa aku tidak menyembah (Tuhan) yang telah menciptakanku dan yang hanya kepada-Nya-lah kamu (semua) akan dikembalikan?</div>
+            </div>
+            <div class="ayat-card" id="ayat-23">
+                <div class="ayat-header">
+                    <div class="ayat-number">23</div>
+                </div>
+                <div class="arabic">ءَأَتَّخِذُ مِن دُونِهِۦٓ ءَالِهَةً إِن يُرِدْنِ ٱلرَّحْمَٰنُ بِضُرٍّ لَّا تُغْنِ عَنِّى شَفَٰعَتُهُمْ شَيْـًٔا وَلَا يُنقِذُونِ ۝</div>
+                <div class="latin">a attakhiżu min dụnihī ālihatan iy yuridnir-raḥmānu biḍurril lā tugni 'annī syafā'atuhum syai`aw wa lā yungqiżụn</div>
+                <div class="arti">Mengapa aku akan menyembah tuhan-tuhan selain-Nya jika (Allah) Yang Maha Pemurah menghendaki kemudharatan terhadapku, niscaya syafa'at mereka tidak memberi manfaat sedikitpun bagi diriku dan mereka tidak (pula) dapat menyelamatkanku?</div>
+            </div>
+            <div class="ayat-card" id="ayat-24">
+                <div class="ayat-header">
+                    <div class="ayat-number">24</div>
+                </div>
+                <div class="arabic">إِنِّىٓ إِذًا لَّفِى ضَلَٰلٍ مُّبِينٍ ۝</div>
+                <div class="latin">innī iżal lafī ḍalālim mubīn</div>
+                <div class="arti">Sesungguhnya aku kalau begitu pasti berada dalam kesesatan yang nyata.</div>
+            </div>
+            <div class="ayat-card" id="ayat-25">
+                <div class="ayat-header">
+                    <div class="ayat-number">25</div>
+                </div>
+                <div class="arabic">إِنِّىٓ ءَامَنتُ بِرَبِّكُمْ فَٱسْمَعُونِ ۝</div>
+                <div class="latin">innī āmantu birabbikum fasma'ụn</div>
+                <div class="arti">Sesungguhnya aku telah beriman kepada Tuhanmu; maka dengarkanlah (pengakuan keimanan)ku.</div>
+            </div>
+            <div class="ayat-card" id="ayat-26">
+                <div class="ayat-header">
+                    <div class="ayat-number">26</div>
+                </div>
+                <div class="arabic">قِيلَ ٱدْخُلِ ٱلْجَنَّةَ ۖ قَالَ يَٰلَيْتَ قَوْمِى يَعْلَمُونَ ۝</div>
+                <div class="latin">qīladkhulil-jannah, qāla yā laita qaumī ya'lamụn</div>
+                <div class="arti">Dikatakan (kepadanya): "Masuklah ke surga". Ia berkata: "Alangkah baiknya sekiranya kaumku mengetahui.</div>
+            </div>
+            <div class="ayat-card" id="ayat-27">
+                <div class="ayat-header">
+                    <div class="ayat-number">27</div>
+                </div>
+                <div class="arabic">بِمَا غَفَرَ لِى رَبِّى وَجَعَلَنِى مِنَ ٱلْمُكْرَمِينَ ۝</div>
+                <div class="latin">bimā gafara lī rabbī wa ja'alanī minal-mukramīn</div>
+                <div class="arti">Apa yang menyebabkan Tuhanku memberi ampun kepadaku dan menjadikan aku termasuk orang-orang yang dimuliakan".</div>
+            </div>
+            <div class="ayat-card" id="ayat-28">
+                <div class="ayat-header">
+                    <div class="ayat-number">28</div>
+                </div>
+                <div class="arabic">۞ وَمَآ أَنزَلْنَا عَلَىٰ قَوْمِهِۦ مِنۢ بَعْدِهِۦ مِن جُندٍ مِّنَ ٱلسَّمَآءِ وَمَا كُنَّا مُنزِلِينَ ۝</div>
+                <div class="latin">wa mā anzalnā 'alā qaumihī mim ba'dihī min jundim minas-samā`i wa mā kunnā munzilīn</div>
+                <div class="arti">Dan kami tidak menurunkan kepada kaumnya sesudah dia (meninggal) suatu pasukanpun dari langit dan tidak layak Kami menurunkannya.</div>
+            </div>
+            <div class="ayat-card" id="ayat-29">
+                <div class="ayat-header">
+                    <div class="ayat-number">29</div>
+                </div>
+                <div class="arabic">إِن كَانَتْ إِلَّا صَيْحَةً وَٰحِدَةً فَإِذَا هُمْ خَٰمِدُونَ ۝</div>
+                <div class="latin">ing kānat illā ṣaiḥataw wāḥidatan fa iżā hum khāmidụn</div>
+                <div class="arti">Tidak ada siksaan atas mereka melainkan satu teriakan suara saja; maka tiba-tiba mereka semuanya mati.</div>
+            </div>
+            <div class="ayat-card" id="ayat-30">
+                <div class="ayat-header">
+                    <div class="ayat-number">30</div>
+                </div>
+                <div class="arabic">يَٰحَسْرَةً عَلَى ٱلْعِبَادِ ۚ مَا يَأْتِيهِم مِّن رَّسُولٍ إِلَّا كَانُوا۟ بِهِۦ يَسْتَهْزِءُونَ ۝</div>
+                <div class="latin">yā ḥasratan 'alal-'ibād, mā ya`tīhim mir rasụlin illā kānụ bihī yastahzi`ụn</div>
+                <div class="arti">Alangkah besarnya penyesalan terhadap hamba-hamba itu, tiada datang seorang rasulpun kepada mereka melainkan mereka selalu memperolok-olokkannya.</div>
+            </div>
+            <div class="ayat-card" id="ayat-31">
+                <div class="ayat-header">
+                    <div class="ayat-number">31</div>
+                </div>
+                <div class="arabic">أَلَمْ يَرَوْا۟ كَمْ أَهْلَكْنَا قَبْلَهُم مِّنَ ٱلْقُرُونِ أَنَّهُمْ إِلَيْهِمْ لَا يَرْجِعُونَ ۝</div>
+                <div class="latin">a lam yarau kam ahlaknā qablahum minal-qurụni annahum ilaihim lā yarji'ụn</div>
+                <div class="arti">Tidakkah mereka mengetahui berapa banyaknya umat-umat sebelum mereka yang telah Kami binasakan, bahwasanya orang-orang (yang telah Kami binasakan) itu tiada kembali kepada mereka.</div>
+            </div>
+            <div class="ayat-card" id="ayat-32">
+                <div class="ayat-header">
+                    <div class="ayat-number">32</div>
+                </div>
+                <div class="arabic">وَإِن كُلٌّ لَّمَّا جَمِيعٌ لَّدَيْنَا مُحْضَرُونَ ۝</div>
+                <div class="latin">wa ing kullul lammā jamī'ul ladainā muḥḍarụn</div>
+                <div class="arti">Dan setiap mereka semuanya akan dikumpulkan lagi kepada Kami.</div>
+            </div>
+            <div class="ayat-card" id="ayat-33">
+                <div class="ayat-header">
+                    <div class="ayat-number">33</div>
+                </div>
+                <div class="arabic">وَءَايَةٌ لَّهُمُ ٱلْأَرْضُ ٱلْمَيْتَةُ أَحْيَيْنَٰهَا وَأَخْرَجْنَا مِنْهَا حَبًّا فَمِنْهُ يَأْكُلُونَ ۝</div>
+                <div class="latin">wa āyatul lahumul-arḍul-maitatu aḥyaināhā wa akhrajnā min-hā ḥabban fa min-hu ya`kulụn</div>
+                <div class="arti">Dan suatu tanda (kekuasaan Allah yang besar) bagi mereka adalah bumi yang mati. Kami hidupkan bumi itu dan Kami keluarkan dari padanya biji-bijian, maka daripadanya mereka makan.</div>
+            </div>
+            <div class="ayat-card" id="ayat-34">
+                <div class="ayat-header">
+                    <div class="ayat-number">34</div>
+                </div>
+                <div class="arabic">وَجَعَلْنَا فِيهَا جَنَّٰتٍ مِّن نَّخِيلٍ وَأَعْنَٰبٍ وَفَجَّرْنَا فِيهَا مِنَ ٱلْعُيُونِ ۝</div>
+                <div class="latin">wa ja'alnā fīhā jannātim min nakhīliw wa a'nābiw wa fajjarnā fīhā minal-'uyụn</div>
+                <div class="arti">Dan Kami jadikan padanya kebun-kebun kurma dan anggur dan Kami pancarkan padanya beberapa mata air,</div>
+            </div>
+            <div class="ayat-card" id="ayat-35">
+                <div class="ayat-header">
+                    <div class="ayat-number">35</div>
+                </div>
+                <div class="arabic">لِيَأْكُلُوا۟ مِن ثَمَرِهِۦ وَمَا عَمِلَتْهُ أَيْدِيهِمْ ۖ أَفَلَا يَشْكُرُونَ ۝</div>
+                <div class="latin">liya`kulụ min ṡamarihī wa mā 'amilat-hu aidīhim, a fa lā yasykurụn</div>
+                <div class="arti">supaya mereka dapat makan dari buahnya, dan dari apa yang diusahakan oleh tangan mereka. Maka mengapakah mereka tidak bersyukur?</div>
+            </div>
+            <div class="ayat-card" id="ayat-36">
+                <div class="ayat-header">
+                    <div class="ayat-number">36</div>
+                </div>
+                <div class="arabic">سُبْحَٰنَ ٱلَّذِى خَلَقَ ٱلْأَزْوَٰجَ كُلَّهَا مِمَّا تُنۢبِتُ ٱلْأَرْضُ وَمِنْ أَنفُسِهِمْ وَمِمَّا لَا يَعْلَمُونَ ۝</div>
+                <div class="latin">sub-ḥānallażī khalaqal-azwāja kullahā mimmā tumbitul-arḍu wa min anfusihim wa mimmā lā ya'lamụn</div>
+                <div class="arti">Maha Suci Tuhan yang telah menciptakan pasangan-pasangan semuanya, baik dari apa yang ditumbuhkan oleh bumi dan dari diri mereka maupun dari apa yang tidak mereka ketahui.</div>
+            </div>
+            <div class="ayat-card" id="ayat-37">
+                <div class="ayat-header">
+                    <div class="ayat-number">37</div>
+                </div>
+                <div class="arabic">وَءَايَةٌ لَّهُمُ ٱلَّيْلُ نَسْلَخُ مِنْهُ ٱلنَّهَارَ فَإِذَا هُم مُّظْلِمُونَ ۝</div>
+                <div class="latin">wa āyatul lahumul-lailu naslakhu min-hun-nahāra fa iżā hum muẓlimụn</div>
+                <div class="arti">Dan suatu tanda (kekuasaan Allah yang besar) bagi mereka adalah malam; Kami tanggalkan siang dari malam itu, maka dengan serta merta mereka berada dalam kegelapan.</div>
+            </div>
+            <div class="ayat-card" id="ayat-38">
+                <div class="ayat-header">
+                    <div class="ayat-number">38</div>
+                </div>
+                <div class="arabic">وَٱلشَّمْسُ تَجْرِى لِمُسْتَقَرٍّ لَّهَا ۚ ذَٰلِكَ تَقْدِيرُ ٱلْعَزِيزِ ٱلْعَلِيمِ ۝</div>
+                <div class="latin">wasy-syamsu tajrī limustaqarril lahā, żālika taqdīrul-'azīzil-'alīm</div>
+                <div class="arti">dan matahari berjalan ditempat peredarannya. Demikianlah ketetapan Yang Maha Perkasa lagi Maha Mengetahui.</div>
+            </div>
+            <div class="ayat-card" id="ayat-39">
+                <div class="ayat-header">
+                    <div class="ayat-number">39</div>
+                </div>
+                <div class="arabic">وَٱلْقَمَرَ قَدَّرْنَٰهُ مَنَازِلَ حَتَّىٰ عَادَ كَٱلْعُرْجُونِ ٱلْقَدِيمِ ۝</div>
+                <div class="latin">wal-qamara qaddarnāhu manāzila ḥattā 'āda kal-'urjụnil-qadīm</div>
+                <div class="arti">Dan telah Kami tetapkan bagi bulan manzilah-manzilah, sehingga (setelah dia sampai ke manzilah yang terakhir) kembalilah dia sebagai bentuk tandan yang tua.</div>
+            </div>
+            <div class="ayat-card" id="ayat-40">
+                <div class="ayat-header">
+                    <div class="ayat-number">40</div>
+                </div>
+                <div class="arabic">لَا ٱلشَّمْسُ يَنۢبَغِى لَهَآ أَن تُدْرِكَ ٱلْقَمَرَ وَلَا ٱلَّيْلُ سَابِقُ ٱلنَّهَارِ ۚ وَكُلٌّ فِى فَلَكٍ يَسْبَحُونَ ۝</div>
+                <div class="latin">lasy-syamsu yambagī lahā an tudrikal-qamara wa lal-lailu sābiqun-nahār, wa kullun fī falakiy yasbaḥụn</div>
+                <div class="arti">Tidaklah mungkin bagi matahari mendapatkan bulan dan malampun tidak dapat mendahului siang. Dan masing-masing beredar pada garis edarnya.</div>
+            </div>
+            <div class="ayat-card" id="ayat-41">
+                <div class="ayat-header">
+                    <div class="ayat-number">41</div>
+                </div>
+                <div class="arabic">وَءَايَةٌ لَّهُمْ أَنَّا حَمَلْنَا ذُرِّيَّتَهُمْ فِى ٱلْفُلْكِ ٱلْمَشْحُونِ ۝</div>
+                <div class="latin">wa āyatul lahum annā ḥamalnā żurriyyatahum fil-fulkil-masyḥụn</div>
+                <div class="arti">Dan suatu tanda (kebesaran Allah yang besar) bagi mereka adalah bahwa Kami angkut keturunan mereka dalam bahtera yang penuh muatan,</div>
+            </div>
+            <div class="ayat-card" id="ayat-42">
+                <div class="ayat-header">
+                    <div class="ayat-number">42</div>
+                </div>
+                <div class="arabic">وَخَلَقْنَا لَهُم مِّن مِّثْلِهِۦ مَا يَرْكَبُونَ ۝</div>
+                <div class="latin">wa khalaqnā lahum mim miṡlihī mā yarkabụn</div>
+                <div class="arti">dan Kami ciptakan untuk mereka yang akan mereka kendarai seperti bahtera itu.</div>
+            </div>
+            <div class="ayat-card" id="ayat-43">
+                <div class="ayat-header">
+                    <div class="ayat-number">43</div>
+                </div>
+                <div class="arabic">وَإِن نَّشَأْ نُغْرِقْهُمْ فَلَا صَرِيخَ لَهُمْ وَلَا هُمْ يُنقَذُونَ ۝</div>
+                <div class="latin">wa in nasya` nugriq-hum fa lā ṣarīkha lahum wa lā hum yungqażụn</div>
+                <div class="arti">Dan jika Kami menghendaki niscaya Kami tenggelamkan mereka, maka tiadalah bagi mereka penolong dan tidak pula mereka diselamatkan.</div>
+            </div>
+            <div class="ayat-card" id="ayat-44">
+                <div class="ayat-header">
+                    <div class="ayat-number">44</div>
+                </div>
+                <div class="arabic">إِلَّا رَحْمَةً مِّنَّا وَمَتَٰعًا إِلَىٰ حِينٍ ۝</div>
+                <div class="latin">illā raḥmatam minnā wa matā'an ilā ḥīn</div>
+                <div class="arti">Tetapi (Kami selamatkan mereka) karena rahmat yang besar dari Kami dan untuk memberikan kesenangan hidup sampai kepada suatu ketika.</div>
+            </div>
+            <div class="ayat-card" id="ayat-45">
+                <div class="ayat-header">
+                    <div class="ayat-number">45</div>
+                </div>
+                <div class="arabic">وَإِذَا قِيلَ لَهُمُ ٱتَّقُوا۟ مَا بَيْنَ أَيْدِيكُمْ وَمَا خَلْفَكُمْ لَعَلَّكُمْ تُرْحَمُونَ ۝</div>
+                <div class="latin">wa iżā qīla lahumuttaqụ mā baina aidīkum wa mā khalfakum la'allakum turḥamụn</div>
+                <div class="arti">Dan apabila dikatakan kepada mereka: "Takutlah kamu akan siksa yang dihadapanmu dan siksa yang akan datang supaya kamu mendapat rahmat", (niscaya mereka berpaling).</div>
+            </div>
+            <div class="ayat-card" id="ayat-46">
+                <div class="ayat-header">
+                    <div class="ayat-number">46</div>
+                </div>
+                <div class="arabic">وَمَا تَأْتِيهِم مِّنْ ءَايَةٍ مِّنْ ءَايَٰتِ رَبِّهِمْ إِلَّا كَانُوا۟ عَنْهَا مُعْرِضِينَ ۝</div>
+                <div class="latin">wa mā ta`tīhim min āyatim min āyāti rabbihim illā kānụ 'anhā mu'riḍīn</div>
+                <div class="arti">Dan sekali-kali tiada datang kepada mereka suatu tanda dari tanda-tanda kekuasaan Tuhan mereka, melainkan mereka selalu berpaling daripadanya.</div>
+            </div>
+            <div class="ayat-card" id="ayat-47">
+                <div class="ayat-header">
+                    <div class="ayat-number">47</div>
+                </div>
+                <div class="arabic">وَإِذَا قِيلَ لَهُمْ أَنفِقُوا۟ مِمَّا رَزَقَكُمُ ٱللَّهُ قَالَ ٱلَّذِينَ كَفَرُوا۟ لِلَّذِينَ ءَامَنُوٓا۟ أَنُطْعِمُ مَن لَّوْ يَشَآءُ ٱللَّهُ أَطْعَمَهُۥٓ إِنْ أَنتُمْ إِلَّا فِى ضَلَٰلٍ مُّبِينٍ ۝</div>
+                <div class="latin">wa iżā qīla lahum anfiqụ mimmā razaqakumullāhu qālallażīna kafarụ lillażīna āmanū a nuṭ'imu mal lau yasyā`ullāhu aṭ'amahū in antum illā fī ḍalālim mubīn</div>
+                <div class="arti">Dan apabila dikatakan kepada mereka: "Nafkahkanlah sebahagian dari rezeki yang diberikan Allah kepadamu", maka orang-orang yang kafir itu berkata kepada orang-orang yang beriman: "Apakah kami akan memberi makan kepada orang-orang yang jika Allah menghendaki tentulah Dia akan memberinya makan, tiadalah kamu melainkan dalam kesesatan yang nyata".</div>
+            </div>
+            <div class="ayat-card" id="ayat-48">
+                <div class="ayat-header">
+                    <div class="ayat-number">48</div>
+                </div>
+                <div class="arabic">وَيَقُولُونَ مَتَىٰ هَٰذَا ٱلْوَعْدُ إِن كُنتُمْ صَٰدِقِينَ ۝</div>
+                <div class="latin">wa yaqụlụna matā hāżal-wa'du ing kuntum ṣādiqīn</div>
+                <div class="arti">Dan mereka berkata: "Bilakah (terjadinya) janji ini (hari berbangkit) jika kamu adalah orang-orang yang benar?"</div>
+            </div>
+            <div class="ayat-card" id="ayat-49">
+                <div class="ayat-header">
+                    <div class="ayat-number">49</div>
+                </div>
+                <div class="arabic">مَا يَنظُرُونَ إِلَّا صَيْحَةً وَٰحِدَةً تَأْخُذُهُمْ وَهُمْ يَخِصِّمُونَ ۝</div>
+                <div class="latin">mā yanẓurụna illā ṣaiḥataw wāḥidatan ta`khużuhum wa hum yakhiṣṣimụn</div>
+                <div class="arti">Mereka tidak menunggu melainkan satu teriakan saja yang akan membinasakan mereka ketika mereka sedang bertengkar.</div>
+            </div>
+            <div class="ayat-card" id="ayat-50">
+                <div class="ayat-header">
+                    <div class="ayat-number">50</div>
+                </div>
+                <div class="arabic">فَلَا يَسْتَطِيعُونَ تَوْصِيَةً وَلَآ إِلَىٰٓ أَهْلِهِمْ يَرْجِعُونَ ۝</div>
+                <div class="latin">fa lā yastaṭī'ụna tauṣiyataw wa lā ilā ahlihim yarji'ụn</div>
+                <div class="arti">Lalu mereka tidak kuasa membuat suatu wasiatpun dan tidak (pula) dapat kembali kepada keluarganya.</div>
+            </div>
+            <div class="ayat-card" id="ayat-51">
+                <div class="ayat-header">
+                    <div class="ayat-number">51</div>
+                </div>
+                <div class="arabic">وَنُفِخَ فِى ٱلصُّورِ فَإِذَا هُم مِّنَ ٱلْأَجْدَاثِ إِلَىٰ رَبِّهِمْ يَنسِلُونَ ۝</div>
+                <div class="latin">wa nufikha fiṣ-ṣụri fa iżā hum minal-ajdāṡi ilā rabbihim yansilụn</div>
+                <div class="arti">Dan ditiuplah sangkakala, maka tiba-tiba mereka keluar dengan segera dari kuburnya (menuju) kepada Tuhan mereka.</div>
+            </div>
+            <div class="ayat-card" id="ayat-52">
+                <div class="ayat-header">
+                    <div class="ayat-number">52</div>
+                </div>
+                <div class="arabic">قَالُوا۟ يَٰوَيْلَنَا مَنۢ بَعَثَنَا مِن مَّرْقَدِنَا ۜ ۗ هَٰذَا مَا وَعَدَ ٱلرَّحْمَٰنُ وَصَدَقَ ٱلْمُرْسَلُونَ ۝</div>
+                <div class="latin">qālụ yā wailanā mam ba'aṡanā mim marqadinā, hāżā mā wa'adar-raḥmānu wa ṣadaqal-mursalụn</div>
+                <div class="arti">Mereka berkata: "Aduhai celakalah kami! Siapakah yang membangkitkan kami dari tempat-tidur kami (kubur)?". Inilah yang dijanjikan (Tuhan) Yang Maha Pemurah dan benarlah Rasul-rasul(Nya).</div>
+            </div>
+            <div class="ayat-card" id="ayat-53">
+                <div class="ayat-header">
+                    <div class="ayat-number">53</div>
+                </div>
+                <div class="arabic">إِن كَانَتْ إِلَّا صَيْحَةً وَٰحِدَةً فَإِذَا هُمْ جَمِيعٌ لَّدَيْنَا مُحْضَرُونَ ۝</div>
+                <div class="latin">ing kānat illā ṣaiḥataw wāḥidatan fa iżā hum jamī'ul ladainā muḥḍarụn</div>
+                <div class="arti">Tidak adalah teriakan itu selain sekali teriakan saja, maka tiba-tiba mereka semua dikumpulkan kepada Kami.</div>
+            </div>
+            <div class="ayat-card" id="ayat-54">
+                <div class="ayat-header">
+                    <div class="ayat-number">54</div>
+                </div>
+                <div class="arabic">فَٱلْيَوْمَ لَا تُظْلَمُ نَفْسٌ شَيْـًٔا وَلَا تُجْزَوْنَ إِلَّا مَا كُنتُمْ تَعْمَلُونَ ۝</div>
+                <div class="latin">fal-yauma lā tuẓlamu nafsun syai`aw wa lā tujzauna illā mā kuntum ta'malụn</div>
+                <div class="arti">Maka pada hari itu seseorang tidak akan dirugikan sedikitpun dan kamu tidak dibalas, kecuali dengan apa yang telah kamu kerjakan.</div>
+            </div>
+            <div class="ayat-card" id="ayat-55">
+                <div class="ayat-header">
+                    <div class="ayat-number">55</div>
+                </div>
+                <div class="arabic">إِنَّ أَصْحَٰبَ ٱلْجَنَّةِ ٱلْيَوْمَ فِى شُغُلٍ فَٰكِهُونَ ۝</div>
+                <div class="latin">inna aṣ-ḥābal-jannatil-yauma fī syugulin fākihụn</div>
+                <div class="arti">Sesungguhnya penghuni surga pada hari itu bersenang-senang dalam kesibukan (mereka).</div>
+            </div>
+            <div class="ayat-card" id="ayat-56">
+                <div class="ayat-header">
+                    <div class="ayat-number">56</div>
+                </div>
+                <div class="arabic">هُمْ وَأَزْوَٰجُهُمْ فِى ظِلَٰلٍ عَلَى ٱلْأَرَآئِكِ مُتَّكِـُٔونَ ۝</div>
+                <div class="latin">hum wa azwājuhum fī ẓilālin 'alal-arā`iki muttaki`ụn</div>
+                <div class="arti">Mereka dan isteri-isteri mereka berada dalam tempat yang teduh, bertelekan di atas dipan-dipan.</div>
+            </div>
+            <div class="ayat-card" id="ayat-57">
+                <div class="ayat-header">
+                    <div class="ayat-number">57</div>
+                </div>
+                <div class="arabic">لَهُمْ فِيهَا فَٰكِهَةٌ وَلَهُم مَّا يَدَّعُونَ ۝</div>
+                <div class="latin">lahum fīhā fākihatuw wa lahum mā yadda'ụn</div>
+                <div class="arti">Di surga itu mereka memperoleh buah-buahan dan memperoleh apa yang mereka minta.</div>
+            </div>
+            <div class="ayat-card" id="ayat-58">
+                <div class="ayat-header">
+                    <div class="ayat-number">58</div>
+                </div>
+                <div class="arabic">سَلَٰمٌ قَوْلًا مِّن رَّبٍّ رَّحِيمٍ ۝</div>
+                <div class="latin">salām, qaulam mir rabbir raḥīm</div>
+                <div class="arti">(Kepada mereka dikatakan): "Salam", sebagai ucapan selamat dari Tuhan Yang Maha Penyayang.</div>
+            </div>
+            <div class="ayat-card" id="ayat-59">
+                <div class="ayat-header">
+                    <div class="ayat-number">59</div>
+                </div>
+                <div class="arabic">وَٱمْتَٰزُوا۟ ٱلْيَوْمَ أَيُّهَا ٱلْمُجْرِمُونَ ۝</div>
+                <div class="latin">wamtāzul-yauma ayyuhal-mujrimụn</div>
+                <div class="arti">Dan (dikatakan kepada orang-orang kafir): "Berpisahlah kamu (dari orang-orang mukmin) pada hari ini, hai orang-orang yang berbuat jahat.</div>
+            </div>
+            <div class="ayat-card" id="ayat-60">
+                <div class="ayat-header">
+                    <div class="ayat-number">60</div>
+                </div>
+                <div class="arabic">۞ أَلَمْ أَعْهَدْ إِلَيْكُمْ يَٰبَنِىٓ ءَادَمَ أَن لَّا تَعْبُدُوا۟ ٱلشَّيْطَٰنَ ۖ إِنَّهُۥ لَكُمْ عَدُوٌّ مُّبِينٌ ۝</div>
+                <div class="latin">a lam a'had ilaikum yā banī ādama al lā ta'budusy-syaiṭān, innahụ lakum 'aduwwum mubīn</div>
+                <div class="arti">Bukankah Aku telah memerintahkan kepadamu hai Bani Adam supaya kamu tidak menyembah syaitan? Sesungguhnya syaitan itu adalah musuh yang nyata bagi kamu",</div>
+            </div>
+            <div class="ayat-card" id="ayat-61">
+                <div class="ayat-header">
+                    <div class="ayat-number">61</div>
+                </div>
+                <div class="arabic">وَأَنِ ٱعْبُدُونِى ۚ هَٰذَا صِرَٰطٌ مُّسْتَقِيمٌ ۝</div>
+                <div class="latin">wa ani'budụnī, hāżā ṣirāṭum mustaqīm</div>
+                <div class="arti">dan hendaklah kamu menyembah-Ku. Inilah jalan yang lurus.</div>
+            </div>
+            <div class="ayat-card" id="ayat-62">
+                <div class="ayat-header">
+                    <div class="ayat-number">62</div>
+                </div>
+                <div class="arabic">وَلَقَدْ أَضَلَّ مِنكُمْ جِبِلًّا كَثِيرًا ۖ أَفَلَمْ تَكُونُوا۟ تَعْقِلُونَ ۝</div>
+                <div class="latin">wa laqad aḍalla mingkum jibillang kaṡīrā, a fa lam takụnụ ta'qilụn</div>
+                <div class="arti">Sesungguhnya syaitan itu telah menyesatkan sebahagian besar diantaramu, Maka apakah kamu tidak memikirkan ?</div>
+            </div>
+            <div class="ayat-card" id="ayat-63">
+                <div class="ayat-header">
+                    <div class="ayat-number">63</div>
+                </div>
+                <div class="arabic">هَٰذِهِۦ جَهَنَّمُ ٱلَّتِى كُنتُمْ تُوعَدُونَ ۝</div>
+                <div class="latin">hāżihī jahannamullatī kuntum tụ'adụn</div>
+                <div class="arti">Inilah Jahannam yang dahulu kamu diancam (dengannya).</div>
+            </div>
+            <div class="ayat-card" id="ayat-64">
+                <div class="ayat-header">
+                    <div class="ayat-number">64</div>
+                </div>
+                <div class="arabic">ٱصْلَوْهَا ٱلْيَوْمَ بِمَا كُنتُمْ تَكْفُرُونَ ۝</div>
+                <div class="latin">iṣlauhal-yauma bimā kuntum takfurụn</div>
+                <div class="arti">Masuklah ke dalamnya pada hari ini disebabkan kamu dahulu mengingkarinya.</div>
+            </div>
+            <div class="ayat-card" id="ayat-65">
+                <div class="ayat-header">
+                    <div class="ayat-number">65</div>
+                </div>
+                <div class="arabic">ٱلْيَوْمَ نَخْتِمُ عَلَىٰٓ أَفْوَٰهِهِمْ وَتُكَلِّمُنَآ أَيْدِيهِمْ وَتَشْهَدُ أَرْجُلُهُم بِمَا كَانُوا۟ يَكْسِبُونَ ۝</div>
+                <div class="latin">al-yauma nakhtimu 'alā afwāhihim wa tukallimunā aidīhim wa tasy-hadu arjuluhum bimā kānụ yaksibụn</div>
+                <div class="arti">Pada hari ini Kami tutup mulut mereka; dan berkatalah kepada Kami tangan mereka dan memberi kesaksianlah kaki mereka terhadap apa yang dahulu mereka usahakan.</div>
+            </div>
+            <div class="ayat-card" id="ayat-66">
+                <div class="ayat-header">
+                    <div class="ayat-number">66</div>
+                </div>
+                <div class="arabic">وَلَوْ نَشَآءُ لَطَمَسْنَا عَلَىٰٓ أَعْيُنِهِمْ فَٱسْتَبَقُوا۟ ٱلصِّرَٰطَ فَأَنَّىٰ يُبْصِرُونَ ۝</div>
+                <div class="latin">walau nasyā`u laṭamasnā 'alā a'yunihim fastabaquṣ-ṣirāṭa fa annā yubṣirụn</div>
+                <div class="arti">Dan jikalau Kami menghendaki pastilah Kami hapuskan penglihatan mata mereka; lalu mereka berlomba-lomba (mencari) jalan. Maka betapakah mereka dapat melihat(nya).</div>
+            </div>
+            <div class="ayat-card" id="ayat-67">
+                <div class="ayat-header">
+                    <div class="ayat-number">67</div>
+                </div>
+                <div class="arabic">وَلَوْ نَشَآءُ لَمَسَخْنَٰهُمْ عَلَىٰ مَكَانَتِهِمْ فَمَا ٱسْتَطَٰعُوا۟ مُضِيًّا وَلَا يَرْجِعُونَ ۝</div>
+                <div class="latin">walau nasyā`u lamasakhnāhum 'alā makānatihim famastaṭā'ụ muḍiyyaw wa lā yarji'ụn</div>
+                <div class="arti">Dan jikalau Kami menghendaki pastilah Kami rubah mereka di tempat mereka berada; maka mereka tidak sanggup berjalan lagi dan tidak (pula) sanggup kembali.</div>
+            </div>
+            <div class="ayat-card" id="ayat-68">
+                <div class="ayat-header">
+                    <div class="ayat-number">68</div>
+                </div>
+                <div class="arabic">وَمَن نُّعَمِّرْهُ نُنَكِّسْهُ فِى ٱلْخَلْقِ ۖ أَفَلَا يَعْقِلُونَ ۝</div>
+                <div class="latin">wa man nu'ammir-hu nunakkis-hu fil-khalq, a fa lā ya'qilụn</div>
+                <div class="arti">Dan barangsiapa yang Kami panjangkan umurnya niscaya Kami kembalikan dia kepada kejadian(nya). Maka apakah mereka tidak memikirkan?</div>
+            </div>
+            <div class="ayat-card" id="ayat-69">
+                <div class="ayat-header">
+                    <div class="ayat-number">69</div>
+                </div>
+                <div class="arabic">وَمَا عَلَّمْنَٰهُ ٱلشِّعْرَ وَمَا يَنۢبَغِى لَهُۥٓ ۚ إِنْ هُوَ إِلَّا ذِكْرٌ وَقُرْءَانٌ مُّبِينٌ ۝</div>
+                <div class="latin">wa mā 'allamnāhusy-syi'ra wa mā yambagī lah, in huwa illā żikruw wa qur`ānum mubīn</div>
+                <div class="arti">Dan Kami tidak mengajarkan syair kepadanya (Muhammad) dan bersyair itu tidaklah layak baginya. Al Quran itu tidak lain hanyalah pelajaran dan kitab yang memberi penerangan.</div>
+            </div>
+            <div class="ayat-card" id="ayat-70">
+                <div class="ayat-header">
+                    <div class="ayat-number">70</div>
+                </div>
+                <div class="arabic">لِّيُنذِرَ مَن كَانَ حَيًّا وَيَحِقَّ ٱلْقَوْلُ عَلَى ٱلْكَٰفِرِينَ ۝</div>
+                <div class="latin">liyunżira mang kāna ḥayyaw wa yaḥiqqal-qaulu 'alal-kāfirīn</div>
+                <div class="arti">supaya dia (Muhammad) memberi peringatan kepada orang-orang yang hidup (hatinya) dan supaya pastilah (ketetapan azab) terhadap orang-orang kafir.</div>
+            </div>
+            <div class="ayat-card" id="ayat-71">
+                <div class="ayat-header">
+                    <div class="ayat-number">71</div>
+                </div>
+                <div class="arabic">أَوَلَمْ يَرَوْا۟ أَنَّا خَلَقْنَا لَهُم مِّمَّا عَمِلَتْ أَيْدِينَآ أَنْعَٰمًا فَهُمْ لَهَا مَٰلِكُونَ ۝</div>
+                <div class="latin">a wa lam yarau annā khalaqnā lahum mimmā 'amilat aidīnā an'āman fa hum lahā mālikụn</div>
+                <div class="arti">Dan apakah mereka tidak melihat bahwa sesungguhnya Kami telah menciptakan binatang ternak untuk mereka yaitu sebahagian dari apa yang telah Kami ciptakan dengan kekuasaan Kami sendiri, lalu mereka menguasainya?</div>
+            </div>
+            <div class="ayat-card" id="ayat-72">
+                <div class="ayat-header">
+                    <div class="ayat-number">72</div>
+                </div>
+                <div class="arabic">وَذَلَّلْنَٰهَا لَهُمْ فَمِنْهَا رَكُوبُهُمْ وَمِنْهَا يَأْكُلُونَ ۝</div>
+                <div class="latin">wa żallalnāhā lahum fa min-hā rakụbuhum wa min-hā ya`kulụn</div>
+                <div class="arti">Dan Kami tundukkan binatang-binatang itu untuk mereka; maka sebahagiannya menjadi tunggangan mereka dan sebahagiannya mereka makan.</div>
+            </div>
+            <div class="ayat-card" id="ayat-73">
+                <div class="ayat-header">
+                    <div class="ayat-number">73</div>
+                </div>
+                <div class="arabic">وَلَهُمْ فِيهَا مَنَٰفِعُ وَمَشَارِبُ ۖ أَفَلَا يَشْكُرُونَ ۝</div>
+                <div class="latin">wa lahum fīhā manāfi'u wa masyārib, a fa lā yasykurụn</div>
+                <div class="arti">Dan mereka memperoleh padanya manfaat-manfaat dan minuman. Maka mengapakah mereka tidak bersyukur?</div>
+            </div>
+            <div class="ayat-card" id="ayat-74">
+                <div class="ayat-header">
+                    <div class="ayat-number">74</div>
+                </div>
+                <div class="arabic">وَٱتَّخَذُوا۟ مِن دُونِ ٱللَّهِ ءَالِهَةً لَّعَلَّهُمْ يُنصَرُونَ ۝</div>
+                <div class="latin">wattakhażụ min dụnillāhi ālihatal la'allahum yunṣarụn</div>
+                <div class="arti">Mereka mengambil sembahan-sembahan selain Allah, agar mereka mendapat pertolongan.</div>
+            </div>
+            <div class="ayat-card" id="ayat-75">
+                <div class="ayat-header">
+                    <div class="ayat-number">75</div>
+                </div>
+                <div class="arabic">لَا يَسْتَطِيعُونَ نَصْرَهُمْ وَهُمْ لَهُمْ جُندٌ مُّحْضَرُونَ ۝</div>
+                <div class="latin">lā yastaṭī'ụna naṣrahum wa hum lahum jundum muḥḍarụn</div>
+                <div class="arti">Berhala-berhala itu tiada dapat menolong mereka; padahal berhala-berhala itu menjadi tentara yang disiapkan untuk menjaga mereka.</div>
+            </div>
+            <div class="ayat-card" id="ayat-76">
+                <div class="ayat-header">
+                    <div class="ayat-number">76</div>
+                </div>
+                <div class="arabic">فَلَا يَحْزُنكَ قَوْلُهُمْ ۘ إِنَّا نَعْلَمُ مَا يُسِرُّونَ وَمَا يُعْلِنُونَ ۝</div>
+                <div class="latin">fa lā yaḥzungka qauluhum, innā na'lamu mā yusirrụna wa mā yu'linụn</div>
+                <div class="arti">Maka janganlah ucapan mereka menyedihkan kamu. Sesungguhnya Kami mengetahui apa yang mereka rahasiakan dan apa yang mereka nyatakan.</div>
+            </div>
+            <div class="ayat-card" id="ayat-77">
+                <div class="ayat-header">
+                    <div class="ayat-number">77</div>
+                </div>
+                <div class="arabic">أَوَلَمْ يَرَ ٱلْإِنسَٰنُ أَنَّا خَلَقْنَٰهُ مِن نُّطْفَةٍ فَإِذَا هُوَ خَصِيمٌ مُّبِينٌ ۝</div>
+                <div class="latin">a wa lam yaral-insānu annā khalaqnāhu min nuṭfatin fa iżā huwa khaṣīmum mubīn</div>
+                <div class="arti">Dan apakah manusia tidak memperhatikan bahwa Kami menciptakannya dari setitik air (mani), maka tiba-tiba ia menjadi penantang yang nyata!</div>
+            </div>
+            <div class="ayat-card" id="ayat-78">
+                <div class="ayat-header">
+                    <div class="ayat-number">78</div>
+                </div>
+                <div class="arabic">وَضَرَبَ لَنَا مَثَلًا وَنَسِىَ خَلْقَهُۥ ۖ قَالَ مَن يُحْىِ ٱلْعِظَٰمَ وَهِىَ رَمِيمٌ ۝</div>
+                <div class="latin">wa ḍaraba lanā maṡalaw wa nasiya khalqah, qāla may yuḥyil-'iẓāma wa hiya ramīm</div>
+                <div class="arti">Dan dia membuat perumpamaan bagi Kami; dan dia lupa kepada kejadiannya; ia berkata: "Siapakah yang dapat menghidupkan tulang belulang, yang telah hancur luluh?"</div>
+            </div>
+            <div class="ayat-card" id="ayat-79">
+                <div class="ayat-header">
+                    <div class="ayat-number">79</div>
+                </div>
+                <div class="arabic">قُلْ يُحْيِيهَا ٱلَّذِىٓ أَنشَأَهَآ أَوَّلَ مَرَّةٍ ۖ وَهُوَ بِكُلِّ خَلْقٍ عَلِيمٌ ۝</div>
+                <div class="latin">qul yuḥyīhallażī ansya`ahā awwala marrah, wa huwa bikulli khalqin 'alīm</div>
+                <div class="arti">Katakanlah: "Ia akan dihidupkan oleh Tuhan yang menciptakannya kali yang pertama. Dan Dia Maha Mengetahui tentang segala makhluk.</div>
+            </div>
+            <div class="ayat-card" id="ayat-80">
+                <div class="ayat-header">
+                    <div class="ayat-number">80</div>
+                </div>
+                <div class="arabic">ٱلَّذِى جَعَلَ لَكُم مِّنَ ٱلشَّجَرِ ٱلْأَخْضَرِ نَارًا فَإِذَآ أَنتُم مِّنْهُ تُوقِدُونَ ۝</div>
+                <div class="latin">allażī ja'ala lakum minasy-syajaril-akhḍari nāran fa iżā antum min-hu tụqidụn</div>
+                <div class="arti">yaitu Tuhan yang menjadikan untukmu api dari kayu yang hijau, maka tiba-tiba kamu nyalakan (api) dari kayu itu".</div>
+            </div>
+            <div class="ayat-card" id="ayat-81">
+                <div class="ayat-header">
+                    <div class="ayat-number">81</div>
+                </div>
+                <div class="arabic">أَوَلَيْسَ ٱلَّذِى خَلَقَ ٱلسَّمَٰوَٰتِ وَٱلْأَرْضَ بِقَٰدِرٍ عَلَىٰٓ أَن يَخْلُقَ مِثْلَهُم ۚ بَلَىٰ وَهُوَ ٱلْخَلَّٰقُ ٱلْعَلِيمُ ۝</div>
+                <div class="latin">a wa laisallażī khalaqas-samāwāti wal-arḍa biqādirin 'alā ay yakhluqa miṡlahum, balā wa huwal-khallāqul-'alīm</div>
+                <div class="arti">Dan tidakkah Tuhan yang menciptakan langit dan bumi itu berkuasa menciptakan yang serupa dengan itu? Benar, Dia berkuasa. Dan Dialah Maha Pencipta lagi Maha Mengetahui.</div>
+            </div>
+            <div class="ayat-card" id="ayat-82">
+                <div class="ayat-header">
+                    <div class="ayat-number">82</div>
+                </div>
+                <div class="arabic">إِنَّمَآ أَمْرُهُۥٓ إِذَآ أَرَادَ شَيْـًٔا أَن يَقُولَ لَهُۥ كُن فَيَكُونُ ۝</div>
+                <div class="latin">innamā amruhū iżā arāda syai`an ay yaqụla lahụ kun fa yakụn</div>
+                <div class="arti">Sesungguhnya keadaan-Nya apabila Dia menghendaki sesuatu hanyalah berkata kepadanya: "Jadilah!" maka terjadilah ia.</div>
+            </div>
+            <div class="ayat-card" id="ayat-83">
+                <div class="ayat-header">
+                    <div class="ayat-number">83</div>
+                </div>
+                <div class="arabic">فَسُبْحَٰنَ ٱلَّذِى بِيَدِهِۦ مَلَكُوتُ كُلِّ شَىْءٍ وَإِلَيْهِ تُرْجَعُونَ ۝</div>
+                <div class="latin">fa sub-ḥānallażī biyadihī malakụtu kulli syai`iw wa ilaihi turja'ụn</div>
+                <div class="arti">Maka Maha Suci (Allah) yang di tangan-Nya kekuasaaan atas segala sesuatu dan kepada-Nya-lah kamu dikembalikan.</div>
+            </div>
+        </div>
+    </div>
+
+    <button class="floating-btn" id="scrollTopBtn" onclick="scrollToTop()">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"></polyline></svg>
+    </button>
+
+    <script>
+        // Font Size Adjuster
+        let currentSize = 32;
+        if(window.innerWidth < 600) currentSize = 28;
+        
+        function adjustFontSize(change) {
+            currentSize += change;
+            if(currentSize < 20) currentSize = 20;
+            if(currentSize > 60) currentSize = 60;
+            document.documentElement.style.setProperty('--arabic-size', currentSize + 'px');
+        }
+
+        // Theme Toggle
+        function toggleTheme() {
+            const html = document.documentElement;
+            const themeText = document.getElementById('theme-text');
+            const currentTheme = html.getAttribute('data-theme');
+            
+            if (currentTheme === 'light') {
+                html.setAttribute('data-theme', 'dark');
+                themeText.textContent = 'Light Mode';
+            } else {
+                html.setAttribute('data-theme', 'light');
+                themeText.textContent = 'Dark Mode';
+            }
+        }
+
+        // Scroll to Top
+        const scrollBtn = document.getElementById('scrollTopBtn');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                scrollBtn.classList.add('visible');
+            } else {
+                scrollBtn.classList.remove('visible');
+            }
+        });
+
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>
